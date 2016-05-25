@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from netCDF4 import Dataset
-import plot_tool_pdf_lower_res as pf
+import plot_tool as pf
 import numpy as np
 from numpy import inf
 import matplotlib.pyplot as plt
@@ -17,10 +17,28 @@ def shift_data(data,lon):
   Shifts data on a map by 180 degree longitude.
   Input: data = your array and longitude array.
   """
-  data1 = data[:,:,:len(lon)/2+1]
-  data2 = data[:,:,len(lon)/2+1:]
-  data_180 = np.concatenate((data2,data1),axis=2)
+  if len(data.shape) = 3:
+  	data1 = data[:,:,:len(lon)/2+1]
+  	data2 = data[:,:,len(lon)/2+1:]
+  	data_180 = np.concatenate((data2,data1),axis=2)
+  if len(data.shape) = 4:
+  	data1 = data[:,:,:,:len(lon)/2+1]
+  	data2 = data[:,:,:,len(lon)/2+1:]
+  	data_180 = np.concatenate((data2,data1),axis=2)
+  else:
+  	print "I don't understand your data"
   return data_180
+
+def shift_lon(lon):
+  """
+  Shifts you lon so that you have it to plot
+  """
+  lon1 = lon[:len(lon)/2+1]
+  lon2 = lon[len(lon)/2+1:]
+  for i in range(len(lon2)):
+    lon2[i] = lon2[i]-360
+  lon_180 = np.r_[lon2,lon1]
+  return lon_180
 
 def extract_months(data,month,ly):
   """
