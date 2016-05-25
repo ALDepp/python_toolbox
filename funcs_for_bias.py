@@ -17,17 +17,19 @@ def shift_data(data,lon):
   Shifts data on a map by 180 degree longitude.
   Input: data = your array and longitude array.
   """
-  if len(data.shape) = 3:
+  if len(data.shape) == 3:
   	data1 = data[:,:,:len(lon)/2+1]
   	data2 = data[:,:,len(lon)/2+1:]
   	data_180 = np.concatenate((data2,data1),axis=2)
-  if len(data.shape) = 4:
+  	return data_180
+  if len(data.shape) == 4:
   	data1 = data[:,:,:,:len(lon)/2+1]
   	data2 = data[:,:,:,len(lon)/2+1:]
-  	data_180 = np.concatenate((data2,data1),axis=2)
+  	data_180 = np.concatenate((data2,data1),axis=3)
+  	return data_180
   else:
   	print "I don't understand your data"
-  return data_180
+
 
 def shift_lon(lon):
   """
