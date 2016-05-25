@@ -115,9 +115,17 @@ def sellonlat(lon,lat,lon_min,lon_max,lat_min,lat_max,data):
   and lon from -180 to 180.
   Then selects the data for the box you want.
   """
-  lomin = np.min(np.where(lon > lon_min))
-  lomax = np.max(np.where(lon < lon_max))
-  lamax = np.max(np.where(lat > lat_min))
-  lamin = np.min(np.where(lat < lat_max))
-  cut_data = data[:,lamin:lamax+1,lomin:lomax+1]
-  return cut_data
+  if lat[0] >= 89:
+    lomin = np.min(np.where(lon > lon_min))
+    lomax = np.max(np.where(lon < lon_max))
+    lamax = np.max(np.where(lat > lat_min))
+    lamin = np.min(np.where(lat < lat_max))
+    cut_data = data[:,lamin:lamax+1,lomin:lomax+1]
+    return cut_data
+  if lat[0] <= -89:
+    lomin = np.min(np.where(lon > lon_min))
+    lomax = np.max(np.where(lon < lon_max))
+    lamax = np.max(np.where(lat < lat_min))
+    lamin = np.min(np.where(lat > lat_max))
+    cut_data = data[:,lamin:lamax+1,lomin:lomax+1]
+    return cut_data
