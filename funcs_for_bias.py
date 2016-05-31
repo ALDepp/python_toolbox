@@ -65,7 +65,7 @@ def find_lon_lat(lon,lat,lon_min,lon_max,lat_min,lat_max):
   loma = np.min(np.where(lon >= lon_max))
   lama = np.max(np.where(lat >= lat_min))
   lami = np.min(np.where(lat <= lat_max))
-  lon_reg = lon[lomi+1:loma]
+  lon_reg = lon[lomi:loma]
   lat_reg = lat[lami:lama+1]
   return lon_reg, lat_reg
 
@@ -81,14 +81,14 @@ def sellonlat_3d(lon,lat,lon_min,lon_max,lat_min,lat_max,data):
     lomax = np.min(np.where(lon >= lon_max))
     lamax = np.max(np.where(lat >= lat_min))
     lamin = np.min(np.where(lat <= lat_max))
-    cut_data = data[:,:,lamin:lamax+1,lomin:lomax+1]
+    cut_data = data[:,:,lamin:lamax+1,lomin:lomax]
     return cut_data
   if lat[0] <= -89:
     lomin = np.max(np.where(lon <= lon_min))
     lomax = np.min(np.where(lon >= lon_max))
     lamax = np.max(np.where(lat <= lat_min))
     lamin = np.min(np.where(lat >= lat_max))
-    cut_data = data[:,:,lamin:lamax+1,lomin:lomax+1]
+    cut_data = data[:,:,lamin:lamax+1,lomin:lomax]
     return cut_data
 
 def extract_months(data,month,ly):
