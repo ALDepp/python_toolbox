@@ -135,7 +135,7 @@ plt.yticks(fontsize=14)
 plt.xticks(fontsize=14)
 plt.plot(range(122),dcum_ece_ave,color='blue',alpha=0.2,lw=2)
 plt.plot(range(122),dcum_era_ave,color='red',alpha=0.2,lw=2)
-plt.plot(range(123),dT_eceb,color='blue',ls='-.',lw=2.5,alpha=0.2)
+plt.plot(range(123),dT_ece,color='blue',ls='-.',lw=2.5,alpha=0.2)
 plt.plot(range(123),dT_era,color='red',ls='-.',lw=2.5,alpha=0.2)
 plt.scatter((13,44,76,106),np.cumsum((-u_ece)),label='ECE',color='blue',marker=r'$\mathrm{U}$',s=150)
 plt.scatter((13,44,76,106),np.cumsum((-v_ece)),label='ECE',color='blue',marker=r'$\mathrm{V}$',s=150)
@@ -152,7 +152,7 @@ plt.ylabel(r"$\Delta$ SST [K]", fontsize=16)
 for i in np.arange(-6,2.5,0.5):
   plt.axhline(i,color='gray',alpha=0.1,ls='--')
   
-plt.savefig('SSTbiasdev_' + region.upper + '_3_dz.pdf',dpi=500, bbox_inches='tight')
+plt.savefig('SSTbiasdev_' + region.upper() + '_3_dz.pdf',dpi=500, bbox_inches='tight')
 plt.close()
 
 #nb4 with actual bijdrage u and v
