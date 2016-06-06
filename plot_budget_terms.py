@@ -35,7 +35,7 @@ bias_q = dT_ece - dT_era
 bias_q_monthly = np.asarray((np.nanmean(bias_q[:31]),np.nanmean(bias_q[31:62]),np.nanmean(bias_q[62:93]),np.nanmean(bias_q[93:])))
 
 #SST dev term
-SSTdevelopmentin = shelve.open(termspath + 'devSST' + region + '.dat', 'r')
+SSTdevelopmentin = shelve.open(termspath + 'devSST_' + region + '.dat', 'r')
 dcum_ece_ave = SSTdevelopmentin['dcum_ece_ave']
 dcum_era_ave = SSTdevelopmentin['dcum_era_ave']
 SSTdevelopmentin.close()
@@ -46,7 +46,7 @@ dcum_era_ave_monthly = np.asarray((np.nanmean(dcum_era_ave[:31]),np.nanmean(dcum
 bias_sst =  dcum_ece_ave - dcum_era_ave 
 
 #horizontal advection terms
-adv = shelve.open(termspath + 'advection_terms_uv' + region + '.dat','r')
+adv = shelve.open(termspath + 'advection_terms_uv_' + region + '.dat','r')
 u_ece = np.asarray(adv['u_adv_terms_' + region + '_ece'])
 v_ece = np.asarray(adv['v_adv_terms_' + region + '_ece'])
 u_ora = np.asarray(adv['u_adv_terms_' + region + '_ora'])
