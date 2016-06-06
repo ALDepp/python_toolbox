@@ -24,8 +24,8 @@ tos_bias_monthly = np.asarray((np.nanmean(tos_bias[:31]),np.nanmean(tos_bias[31:
 
 #Q terms
 Qin = shelve.open(termspath + 'cumsum_deltaK_duetoQ.dat', 'r')
-dT_ece = Qin['dT_ece' + region] #this is the temp change due to Q
-dT_era = Qin['dT_era' + region]
+dT_ece = Qin['dT_ece_' + region] #this is the temp change due to Q
+dT_era = Qin['dT_era_' + region]
 Qin.close()
 
 dT_ece_monthly = np.asarray((np.nanmean(dT_ece[:31]),np.nanmean(dT_ece[31:62]),np.nanmean(dT_ece[62:93]),np.nanmean(dT_ece[93:])))
