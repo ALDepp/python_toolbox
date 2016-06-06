@@ -66,6 +66,7 @@ Tin.close()
 mfile = 'mesh_mask_ORAS4_Hao.nc'
 m_in = Dataset(meshpath + mfile, 'r')
 e3t = m_in.variables['e3t'][0,:,:,:] # vertical T metric partial steps ! this is the one I want
+e3w = m_in.variables['e3w'][0,:,:,:]
 m_in.close()
 
 # dw/dz = - (du/dx + dv/dz)
@@ -235,7 +236,7 @@ wdTdz_itcz_weighted = np.asarray((wdTdz_itcz_may,wdTdz_itcz_jun,wdTdz_itcz_jul,w
 #new
 #array([ 1.73702512,  1.75346754,  1.25142722,  0.96643908])
 
-outt = shelve.open('W_below_mxl_divH_ora_itcz_mesh.dat') #(idx -1)
+outt = shelve.open('W_below_mxl_divH_ora_itcz_ORAmesh.dat') #(idx -1)
 outt['W_itcz'] = wdTdz_itcz_weighted
 outt.close()
 
@@ -267,6 +268,6 @@ wdTdz_ab_aug_b = np.nansum(w_wdTdz_boxjes_ab_b[3,:,:],axis=(0,1)) / np.nansum(vo
 
 wdTdz_ab_ab_weighted_b = np.asarray((wdTdz_ab_may_b,wdTdz_ab_jun_b,wdTdz_ab_jul_b,wdTdz_ab_aug_b))
 
-out = shelve.open('W_below_mxl_divH_ora_ab_mesh.dat')
+out = shelve.open('W_below_mxl_divH_ora_ab_ORAmesh.dat')
 out['W_ab'] = wdTdz_ab_ab_weighted_b
 out.close()
