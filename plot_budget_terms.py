@@ -46,7 +46,7 @@ dcum_era_ave_monthly = np.asarray((np.nanmean(dcum_era_ave[:31]),np.nanmean(dcum
 bias_sst =  dcum_ece_ave - dcum_era_ave 
 
 #horizontal advection terms
-adv = shelve.open('advection_terms_uv' + region + '.dat','r')
+adv = shelve.open(termspath + 'advection_terms_uv' + region + '.dat','r')
 u_ece = np.asarray(adv['u_adv_terms_' + region + '_ece'])
 v_ece = np.asarray(adv['v_adv_terms_' + region + '_ece'])
 u_ora = np.asarray(adv['u_adv_terms_' + region + '_ora'])
@@ -58,12 +58,12 @@ uv_ora = np.cumsum((-u_ra))+np.cumsum((-v_ora))
 bias_uv_ece_ora = uv_ece - uv_ora
 
 #upwelling term
-upw_ece = shelve.open('W_below_mxl_divH_ece_' + region + '_mesh.dat')
+upw_ece = shelve.open(termspath + 'W_below_mxl_divH_ece_' + region + '_mesh.dat')
 W_ece = upw_ece['W_' + region]
 upw_ece.close()
 contr_w_ece = np.cumsum(-W_ece)
 
-upw_ora = shelve.open('W_below_mxl_divH_ora_' + region + '_ORAmesh.dat')
+upw_ora = shelve.open(termspath + 'W_below_mxl_divH_ora_' + region + '_ORAmesh.dat')
 W_ora = upw_ora['W_' + region]
 upw_ora.close()
 contr_w_ora = np.cumsum(-W_ora)
