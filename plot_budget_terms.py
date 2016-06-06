@@ -54,7 +54,7 @@ v_ora = np.asarray(adv['v_adv_terms_' + region + '_ora'])
 adv.close()
 
 uv_ece = np.cumsum((-u_ece))+np.cumsum((-v_ece))
-uv_ora = np.cumsum((-u_ra))+np.cumsum((-v_ora))
+uv_ora = np.cumsum((-u_ora))+np.cumsum((-v_ora))
 bias_uv_ece_ora = uv_ece - uv_ora
 
 #upwelling term
