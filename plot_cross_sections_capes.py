@@ -327,10 +327,48 @@ plt.tight_layout()
 plt.savefig('Thetao_1725S_150m_2000-2009_ece.png',dpi=300)
 plt.close()
 
-#now I would like to plot the difference, that means interpolating the data on the same z grid! probably on ora, because that way I'm reducing and not adding data
+#now I would like to plot the difference, that means interpolating the data on the same z grid!
 
 # from bigger to finer grid -> put ece on era grid
-cross_sec1_ece = votemper_TA[:,:,lat_C1[0][0],:]
+lat_C1_e = np.where(latTA_e == -0.75) 
+lat_C1 = np.where(latTA == -0.75) 
+cross_sec1_ece = votemper_TA[:,:,lat_C1_e[0][0],:]
+cross_sec1_ora = thetao_TA[:,:,lat_C1[0][0],:]
+x_ece,y_ece = np.meshgrid(lonTA_e,z_e) #(ece grid)
+x,y = np.meshgrid(lonTA,z) #ora grid
+
+cross_sec1_ece_interp = np.zeros((
+		  len(cross_sec1_ece[:,0,0]),
+		  len(cross_sec1_ora[0,:,0]),
+		  len(cross_sec1_ora[0,0,:])))
+
+for i in range(len(cross_sec1_ece[:,0,0])):
+  cross_sec1_ece_interp[i,:,:] = griddata((x_mo.ravel(),y_mo.ravel()),
+					  cross_sec1_ece[i,:,:].ravel(),
+					  (x, y), method='cubic')
+  
+# calc diff ora and ece
+diff_sec1 = np.zeros_like(cross_sec1_ece_interp)
+for i in range(len(diff_sec1[:,0,0])):
+  diff_sec1[i,:,:] = - cross_sec1_ora[i+4,:,:] + cross_sec1_ece_interp[i,:,:]
+
+#plot the difference
+fig, axes = plt.subplots(2,2, sharex=True, sharey=True,figsize=(10,15))
+axes[0,0].set_ylim(0,150)
+axes[0,0].set_xlim(-50,15)
+axes[0,0].invert_yaxis()
+for i,ax in enumerate(axes.flatten()):
+  data = ax.contourf(lonTA,z,diff_sec1[i,:,:],levels=np.arange(-3,3.25,0.125))
+  ax.set_title(months[i+4], fontsize=12)
+
+plt.tight_layout()
+fig.subplots_adjust(right=0.8)
+cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
+cbar = fig.colorbar(data, cax=cbar_ax)
+cbar.set_ticks(np.arange(-3,4,0.5))
+#cbar.set_label('K')
+plt.savefig('thetao_diff_1725S_150m_2000-2009_ece-ora.png',dpi=300)
+plt.close()
 
 ### plot where the buoys are
 bpath='/nobackup_1/users/deppenme/PIRATA/buoy_8E_6S/'
