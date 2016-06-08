@@ -46,7 +46,8 @@ votemper_TA = fs.sellonlat_3d(lon_180_e,lat_e,-60,20,-35,35,votemper_180)
 lonTA_e, latTA_e = fs.find_lon_lat(lon_180_e,lat_e,-60,20,-35,35)
 
 months = ['January','Febuary','March','April','May','June','July','August','September','October','November','December']
-#plot oras4
+
+#plot oras4 sst maps
 #for single plot per file output
 for i in range(12):
   map = Basemap(projection='cea',
@@ -83,8 +84,6 @@ plt.tight_layout()
 plt.savefig('sc_sst_oras4.ps',dpi=300)
 plt.close()
 
-#plt.setp([a.get_xticklabels() for a in ax[0, :]], visible=False)
-#plt.setp([a.get_yticklabels() for a in ax[:, 1]], visible=False)
 
 #plot ece
 # for individual plots
@@ -277,59 +276,58 @@ plt.tight_layout()
 plt.savefig('Thetao_075S_150m_2000-2009_ece.png',dpi=300)
 plt.close()
 
-# cape 2 17.3S
-#ora
-lat_C2 = np.where(latTA == -17.25) 
-fig, axes = plt.subplots(4,3, sharex=True, sharey=True,figsize=(10,15))
-axes[0,0].set_ylim(0,150)
-axes[0,0].set_xlim(-50,15)
-axes[0,0].invert_yaxis()
-for i,ax in enumerate(axes.flatten()):
-  ax.contourf(lonTA,z,thetao_TA[i,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
-  cont = ax.contour(lonTA,z,thetao_TA[i,:,lat_C2[0][0],:],levels=range(19,26))
-  ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
-  ax.set_title(months[i], fontsize=12)
+## cape 2 17.3S ! CAPE TWO IS NOT SO INTERESTING
+##ora
+#lat_C2 = np.where(latTA == -17.25) 
+#fig, axes = plt.subplots(4,3, sharex=True, sharey=True,figsize=(10,15))
+#axes[0,0].set_ylim(0,150)
+#axes[0,0].set_xlim(-50,15)
+#axes[0,0].invert_yaxis()
+#for i,ax in enumerate(axes.flatten()):
+  #ax.contourf(lonTA,z,thetao_TA[i,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
+  #cont = ax.contour(lonTA,z,thetao_TA[i,:,lat_C2[0][0],:],levels=range(19,26))
+  #ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
+  #ax.set_title(months[i], fontsize=12)
  
-plt.tight_layout()
-plt.savefig('Thetao_1725S_150m_2000-2009_ora.png',dpi=300)
-plt.close()
+#plt.tight_layout()
+#plt.savefig('Thetao_1725S_150m_2000-2009_ora.png',dpi=300)
+#plt.close()
 
-#ora 4 months
-lat_C2 = np.where(latTA == -17.25) 
-fig, axes = plt.subplots(2,2, sharex=True, sharey=True,figsize=(10,15))
-axes[0,0].set_ylim(0,150)
-axes[0,0].set_xlim(-50,15)
-axes[0,0].invert_yaxis()
-for i,ax in enumerate(axes.flatten()):
-  ax.contourf(lonTA,z,thetao_TA[i+4,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
-  cont = ax.contour(lonTA,z,thetao_TA[i+4,:,lat_C2[0][0],:],levels=range(19,26))
-  ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
-  ax.set_title(months[i+4], fontsize=12)
+##ora 4 months
+#lat_C2 = np.where(latTA == -17.25) 
+#fig, axes = plt.subplots(2,2, sharex=True, sharey=True,figsize=(10,15))
+#axes[0,0].set_ylim(0,150)
+#axes[0,0].set_xlim(-50,15)
+#axes[0,0].invert_yaxis()
+#for i,ax in enumerate(axes.flatten()):
+  #ax.contourf(lonTA,z,thetao_TA[i+4,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
+  #cont = ax.contour(lonTA,z,thetao_TA[i+4,:,lat_C2[0][0],:],levels=range(19,26))
+  #ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
+  #ax.set_title(months[i+4], fontsize=12)
  
-plt.tight_layout()
-plt.savefig('Thetao_1725S_150m_2000-2009_ora_4m.png',dpi=300)
-plt.close()
+#plt.tight_layout()
+#plt.savefig('Thetao_1725S_150m_2000-2009_ora_4m.png',dpi=300)
+#plt.close()
 
 
-#ece
-lat_C2_e = np.where(latTA_e == -17.25) 
-fig, axes = plt.subplots(2,2, sharex=True, sharey=True,figsize=(10,15))
-axes[0,0].set_ylim(0,150)
-axes[0,0].set_xlim(-50,15)
-axes[0,0].invert_yaxis()
-for i,ax in enumerate(axes.flatten()):
-  ax.contourf(lonTA_e,z_e,votemper_TA[i,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
-  cont = ax.contour(lonTA_e,z_e,votemper_TA[i,:,lat_C2[0][0],:],levels=range(19,26))
-  ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
-  ax.set_title(months[i+4], fontsize=12)
+##ece
+#lat_C2_e = np.where(latTA_e == -17.25) 
+#fig, axes = plt.subplots(2,2, sharex=True, sharey=True,figsize=(10,15))
+#axes[0,0].set_ylim(0,150)
+#axes[0,0].set_xlim(-50,15)
+#axes[0,0].invert_yaxis()
+#for i,ax in enumerate(axes.flatten()):
+  #ax.contourf(lonTA_e,z_e,votemper_TA[i,:,lat_C2[0][0],:],levels=np.arange(10,30,0.25))
+  #cont = ax.contour(lonTA_e,z_e,votemper_TA[i,:,lat_C2[0][0],:],levels=range(19,26))
+  #ax.clabel(cont, inline=1, fontsize=10,fmt='%1i',)
+  #ax.set_title(months[i+4], fontsize=12)
  
-plt.tight_layout()
-plt.savefig('Thetao_1725S_150m_2000-2009_ece.png',dpi=300)
-plt.close()
+#plt.tight_layout()
+#plt.savefig('Thetao_1725S_150m_2000-2009_ece.png',dpi=300)
+#plt.close()
 
-#now I would like to plot the difference, that means interpolating the data on the same z grid!
-
-# from bigger to finer grid -> put ece on era grid
+# plot subsurface differences
+#fist interpolate ece on era grid (fine to coarse)
 lat_C1_e = np.where(latTA_e == -0.75) 
 lat_C1 = np.where(latTA == -0.75) 
 cross_sec1_ece = votemper_TA[:,:,lat_C1_e[0][0],:]
@@ -367,7 +365,7 @@ cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
 cbar = fig.colorbar(data, cax=cbar_ax)
 cbar.set_ticks(np.arange(-3,4,0.5))
 #cbar.set_label('K')
-plt.savefig('thetao_diff_1725S_150m_2000-2009_ece-ora.png',dpi=300)
+plt.savefig('thetao_diff_075S_150m_2000-2009_ece-ora.png',dpi=300)
 plt.close()
 
 ### plot where the buoys are
@@ -392,9 +390,38 @@ aug_b = np.nanmean(t[3:5,:,0,0],axis=0)
 levels = np.arange(10,30,0.25)
 plt.contourf(time_b,z_b,t[:,:,0,0].transpose(),levels)
 plt.ylim(0,150)
+plt.ylabel('Depth')
 plt.gca().invert_yaxis()
 plt.title('6S 8E PIRATA buy from May to August')
+plt.xlabel('Days from 01-05')
+plt.savefig('buoy_6S_8E_May-Aug.ps', dpi=300)
+plt.close()
 
+#plot the buoy data dev with time -> actually 
+#do the same thing for the model and oras4 so we can compare
+bloc_ece = votemper_TA[:,:,np.where(latTA_e == -6)[0][0],np.where(lonTA_e==8.25)[0][0]]
+levels = np.arange(10,30,0.25)
+plt.contourf(range(4),z_e,bloc_ece.transpose(),levels)
+plt.ylim(0,150)
+plt.ylabel('Depth')
+plt.gca().invert_yaxis()
+plt.title('6S 8.25E ECE from May to August')
+plt.xlabel('Months from 01-05')
+plt.savefig('ece_6S_8E_May-Aug.ps', dpi=300)
+plt.close()
+
+bloc_ora = thetao_TA[:,:,np.where(latTA == -6)[0][0],np.where(lonTA==8.25)[0][0]]
+levels = np.arange(10,30,0.25)
+plt.contourf(range(4),z,bloc_ora[4:8,:].transpose(),levels)
+plt.ylim(0,150)
+plt.ylabel('Depth')
+plt.gca().invert_yaxis()
+plt.title('6S 8.25E ORAS4 from May to August')
+plt.xlabel('Months from 01-05')
+plt.savefig('ora_6S_8E_May-Aug.ps', dpi=300)
+plt.close()
+
+#plot the temperature profiles with depth
 plt.plot(thetao_TA[6,:,np.where(latTA==-6)[0][0],np.where(lonTA==8.25)[0][0]],z,label='ORAS4')
 plt.plot(votemper_TA[2,:,np.where(latTA==-6)[0][0],np.where(lonTA==8.25)[0][0]],z_e,label='EC-E')
 plt.plot(jul_b,z_b,label='PIRATA')
@@ -404,9 +431,8 @@ plt.gca().invert_yaxis()
 plt.legend(bbox_to_anchor=(1, 0.25))
 plt.savefig('T_profiles_6S_8E.ps')
 
-
-#cross sections along the capes
-# buy 6S / 8E
+# cross section at buoy site
+# buoy 6S / 8E
 #ora
 lat_BY = np.where(latTA == -6) 
 for i in range(12):
@@ -428,3 +454,66 @@ for i in range(4):
   plt.title(months[i+4])
   plt.savefig('Thetao_6S_150m_2000-2009_' + months[i+4] + '_ece.ps')
   plt.close()
+  
+# plot hovmoeller diagrams
+# at C1 latitude
+short_months = []
+for i in range(len(months)):
+  short_months.append(months[i][:3])
+
+X, Y = np.meshgrid(lonTA, range(1,13))
+fig=plt.figure()
+ax1 = fig.add_subplot(111)
+lvls=np.arange(22,29.5,0.125)
+ax1.set_xlim(-45,10)
+CF = ax1.contourf(X,Y,cross_sec1_ora[:,0,:],
+         levels = lvls
+        )
+cbar = plt.colorbar(CF, ticks=np.arange(22,31,1), format='%1i')
+#cbar.set_label('K',rotation='horizontal')
+plt.yticks(range(1,13),short_months)
+plt.tight_layout()
+plt.savefig('hovmoeller_ora.ps',dpi=300)
+plt.close()
+
+# ece data
+X, Y = np.meshgrid(lonTA, range(5,9))
+fig=plt.figure()
+ax1 = fig.add_subplot(111)
+lvls=np.arange(22,29.5,0.125)
+ax1.set_xlim(-45,10)
+CF = ax1.contourf(X,Y,cross_sec1_ece[:,0,:],
+         levels = lvls
+        )
+cbar = plt.colorbar(CF, ticks=np.arange(22,31,1), format='%1i')
+#cbar.set_label('K',rotation='horizontal')
+plt.yticks(range(1,13),short_months)
+plt.tight_layout()
+plt.savefig('hovmoeller_ece.ps',dpi=300)
+plt.close()
+
+#combine
+X, Y = np.meshgrid(lonTA, range(1,13))
+X_e, Y_e = np.meshgrid(lonTA, range(5,9))
+fig=plt.figure()
+ax1 = fig.add_subplot(111)
+lvls=np.arange(22,29.5,0.125)
+ax1.set_xlim(-45,9)
+CF = ax1.contourf(X,Y,cross_sec1_ora[:,0,:],
+         levels = lvls
+        )
+cbar = plt.colorbar(CF, ticks=np.arange(22,31,1), format='%1i')
+CF1 = ax1.contour(X,Y,cross_sec1_ora[:,0,:],
+         levels = np.arange(22,30,1)
+        )
+plt.clabel(CF1, ticks=np.arange(22,31,1),inline=True, fmt='%.1f')
+CF2 = ax1.contour(X_e,Y_e,cross_sec1_ece[:,0,:],
+         levels = np.arange(22,28.5,0.5), colors='k'
+        )
+plt.clabel(CF2, ticks=np.arange(22,31,1),inline=True, fmt='%.1f')
+plt.yticks(range(1,13),short_months)
+#plt.xticks(np.arange(-50,15,10),['50W','40W','30W','20W','10W','0E','10E'])
+#plt.xlabel(r'$^o$E')
+#plt.tight_layout()
+plt.savefig('hovmoeller_ora_ece.ps',dpi=300, bbox_inches="tight")
+plt.close()
